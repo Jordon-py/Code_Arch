@@ -6,6 +6,7 @@
 - Categorize snippets by:
   - Functional Category (`Control Flow`, `If/Else`, `Functions`, etc.)
   - Parent Module (`Auth`, `Forms`, `Storage`, etc.)
+
 - **Tag** and **search** snippets for rapid retrieval
 - Built for easy theming (dark mode, color tags)
 - LocalStorage-based persistence (can easily migrate to backend)
@@ -15,5 +16,5 @@
 
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/code-archive.git
-   cd code-archive
+  git clone https://github.com/Jordon-py/Code_Arch.git 
+  cd code-archive
