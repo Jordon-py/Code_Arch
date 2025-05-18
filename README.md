@@ -15,6 +15,6 @@
 ## 🚀 Getting Started
 
 1. **Clone the repo:**
-   ```bash
+```bash
   git clone https://github.com/Jordon-py/Code_Arch.git 
   cd code-archive
