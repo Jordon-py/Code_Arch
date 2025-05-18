@@ -1,35 +1,41 @@
 /**
  * Navbar.jsx
- * - Top-level navigation.
+ * - Top-level navigation bar for SPA.
+ * - Provides navigation links for main routes.
+ * - Enables user navigation across SPA pages.
  * - Uses semantic HTML (<nav>).
  * - Highlights current route for accessibility (aria-current, visually).
  */
 
+import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/Navbar.module.css";
 
 export default function Navbar() {
   return (
     <nav className={styles.navbar} aria-label="Main navigation">
-      <div className={styles.logo}>Code Archive</div>
-      <ul className={styles.links}>
-        {/* NavLink auto-applies 'active' style on current route */}
-        <li>
-          <NavLink to="/" className={({ isActive }) => isActive ? styles.active : undefined} end>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/archive" className={({ isActive }) => isActive ? styles.active : undefined}>
-            Archive
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/add" className={({ isActive }) => isActive ? styles.active : undefined}>
-            Add Snippet
-          </NavLink>
-        </li>
-      </ul>
+      <NavLink to="/" className={styles.logo} end>
+        Code Archive
+      </NavLink>
+      <div>
+        {/* NavLink 'end' prop ensures Home is only active on exact "/" */}
+        <NavLink
+          to="/archive"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          Archive
+        </NavLink>
+        <NavLink
+          to="/add"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          Add Snippet
+        </NavLink>
+      </div>
     </nav>
   );
 }

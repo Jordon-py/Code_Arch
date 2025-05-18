@@ -1,0 +1,47 @@
+/* Navbar.module.css - Styles for Navbar component
+   What: Provides responsive, accessible navigation bar styles.
+   Why: Ensures navigation is visually clear and mobile-friendly.
+   How: Uses LCH color values and flexbox for layout.
+*/
+:root {
+  --color-primary: #22223b;
+  --color-accent: #facc15;
+  --color-bg: #f7fafc;
+  --color-link: #3a86ff;
+}
+
+.navbar {
+  background: linear-gradient(90deg, var(--color-primary) 70%, #3a86ff 120%);
+  color: var(--color-accent);
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 16px rgba(58,134,255,0.06);
+}
+
+.logo {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 2px;
+}
+
+.links {
+  display: flex;
+  gap: 2rem;
+}
+.links a {
+  color: #f7fafc;
+  text-decoration: none;
+  font-size: 1.07rem;
+  font-weight: 500;
+  transition: color 0.16s;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+.links a:hover,
+.links .active {
+  color: var(--color-accent);
+  background: rgba(250,204,21,0.14);
+}

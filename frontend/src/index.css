@@ -1,0 +1,18 @@
+/* index.css - Global styles for the SPA
+   What: Provides base CSS resets and root variables.
+   Why: Ensures consistent styling across the app.
+   How: Imported in main.jsx to apply styles globally.
+*/
+
+:root {
+  /* Example LCH color variable for modern, accessible design */
+  --primary-bg: lch(98 0 0);
+  --primary-text: lch(20 0 0);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--primary-bg);
+  color: var(--primary-text);
+}

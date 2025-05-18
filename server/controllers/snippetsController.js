@@ -13,104 +13,83 @@
 // Each function:
 //   - Receives Express req/res
 //   - Interacts with the Snippet model (Mongoose)
-//   - Sends JSON response (success or error)
+//   - Sends JSON response (success or error) in a consistent format
 // -----------------------------------------------------------
 
-const Snippet = require('../models/Snippet');
-
-
-
+const Snippet = require("../models/Snippet");
 
 // -------------------------------------------------- GET /api/snippets -----    // List all snippets (newest first)
 
 exports.getAllSnippets = async (req, res) => {
-    try {
-      const snippets = await Snippet.find().sort({ createdAt: -1 })
-        console.log(snippets)
-        if (snippets) {
-            res.json(snippets)
-            return snippets
-        }
-    }
-    
-    catch (err) {
-        console.log(err)
-        res.status(500).json({ error: 'Server error in Controllers' });
+  try {
+    const snippets = await Snippet.find().sort({ createdAt: -1 });
+    res.json({ success: true, data: snippets });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, error: "Server error in Controllers" });
   }
 };
-
 
 //      ----------------------------------- POST /api/snippets   ----------------------------------------------------->     ----- // Add a new snippet
 
 exports.createSnippet = async (req, res) => {
   try {
-    const snippet = await Snippet.create(req.body)
-    res.status(201).json(snippet);
-  }
-  
-  catch (err) {
-    if (err.name === 'ValidationError') {
-      return res.status(400).json({ error: err.message });
+    const snippet = await Snippet.create(req.body);
+    res.status(201).json({ success: true, data: snippet });
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      return res.status(400).json({ success: false, error: err.message });
     }
-    res.status(500).json({ error: 'Server error while creating snippet' });
+    res
+      .status(500)
+      .json({ success: false, error: "Server error while creating snippet" });
   }
 };
-
-
-
-
 
 // -----------------------------------------------------GET /api/snippets/:id -----
 
 exports.getSnippetById = async (req, res) => {
   try {
-      const snippet = await Snippet.findById(req.params.id);
-      if (!snippet)
-          return res.status(404).json({ error: 'Snippet not found' });
-      
-      res.json(snippet);
-  }
-    
-  catch (err) {
-    res.status(400).json({ error: 'Invalid snippet ID' });
+    const snippet = await Snippet.findById(req.params.id);
+    if (!snippet)
+      return res
+        .status(404)
+        .json({ success: false, error: "Snippet not found" });
+
+    res.json({ success: true, data: snippet });
+  } catch (err) {
+    res.status(400).json({ success: false, error: "Invalid snippet ID" });
   }
 };
-
-
-
-
 
 // ----- PUT /api/snippets/:id -----
 exports.updateSnippet = async (req, res) => {
   try {
-    const snippet = await Snippet.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    );
-    if (!snippet) return res.status(404).json({ error: 'Snippet not found' });
-    res.json(snippet);
-  }
-  
-  catch (err) {
-    res.status(400).json({ error: err.message });
+    const snippet = await Snippet.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!snippet)
+      return res
+        .status(404)
+        .json({ success: false, error: "Snippet not found" });
+    res.json({ success: true, data: snippet });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
   }
 };
-
-
-
 
 // ----- DELETE /api/snippets/:id -----
 exports.deleteSnippet = async (req, res) => {
   try {
-    const snippet = await Snippet.findByIdAndDelete(req.params.id)
-      if (!snippet)
-          return res.status(404).json({ error: 'Snippet not found' });
-      res.json({ message: 'Snippet deleted.' });
-  }
-  
-  catch (err) {
-    res.status(400).json({ error: 'Invalid snippet ID' });
+    const snippet = await Snippet.findByIdAndDelete(req.params.id);
+    if (!snippet)
+      return res
+        .status(404)
+        .json({ success: false, error: "Snippet not found" });
+    res.json({ success: true, message: "Snippet deleted." });
+  } catch (err) {
+    res.status(400).json({ success: false, error: "Invalid snippet ID" });
   }
 };
-

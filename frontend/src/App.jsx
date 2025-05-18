@@ -6,26 +6,21 @@
  * - Applies modular CSS for maintainability.
  */
 
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import Navbar from "./components/Navbar";                             //   Layout components
+import Navbar from "./components/Navbar"; //   Layout components
 import Footer from "./components/Footer";
 
+import Home from "./pages/Home"; //  -----   Pages
+const Archive = lazy(() => import("./pages/Archive"));
+const AddSnippet = lazy(() => import("./pages/AddSnippet"));
 
-import Home from "./pages/Home";                   //  -----   Pages
-import Archive from "./pages/Archive";
-import AddSnippet from "./pages/AddSnippet";
-
-import styles from "./styles/App.module.css";     // Modular CSS for root layout
-
-
-
-
+import styles from "./styles/App.module.css"; // Modular CSS for root layout
 
 export default function App() {
   return (
-    <Router>
+    <>
       {/* Global Layout */}
       <div className={styles.appWrapper}>
         {/* Consistent navigation at top */}
@@ -33,20 +28,23 @@ export default function App() {
 
         {/* Central content area for all routes */}
         <main className={styles.mainContent}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/archive" element={<Archive />} />
-            <Route path="/add" element={<AddSnippet />} />
-            {/* 
-              Optional: add a 404 "Not Found" page here for unmatched routes
-              <Route path="*" element={<NotFound />} /> 
-            */}
-          </Routes>
+          {/* Suspense provides fallback UI while lazy routes load */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              {/* Default route: Home page */}
+              <Route path="/" element={<Home />} />
+              {/* Archive and AddSnippet routes */}
+              <Route path="/archive" element={<Archive />} />
+              <Route path="/add" element={<AddSnippet />} />
+              {/* Catch-all: redirect unknown routes to Home */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
         </main>
 
         {/* Footer always visible */}
         <Footer />
       </div>
-    </Router>
+    </>
   );
 }

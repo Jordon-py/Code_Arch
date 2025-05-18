@@ -1,0 +1,103 @@
+/* Uses LCH color values for modern, accessible color contrast throughout the form UI */
+
+.form {
+  background: lch(25 10 270); /* replaces #23233a */
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 2px 32px rgba(58, 134, 255, 0.08);
+  max-width: 700px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+}
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.flexRow {
+  display: flex;
+  gap: 2rem;
+}
+label {
+  font-weight: 600;
+  color: lch(85 90 90); /* replaces #facc15 */
+  letter-spacing: 0.03em;
+}
+input,
+textarea,
+select {
+  padding: 0.7rem;
+  border: none;
+  border-radius: 7px;
+  background: lch(15 5 270); /* replaces #18181c */
+  color: lch(98 2 90); /* replaces #f7fafc */
+  font-size: 1.04rem;
+  transition: border 0.2s;
+  outline: none;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  border: 2px solid lch(85 90 90); /* replaces #facc15 */
+}
+.required {
+  color: lch(55 90 40); /* replaces #e63946 */
+  margin-left: 3px;
+}
+.codeEditor {
+  font-family: "Fira Mono", "Consolas", monospace;
+  min-height: 120px;
+}
+.error {
+  border: 2px solid lch(55 90 40) !important; /* replaces #e63946 */
+}
+.errorMsg {
+  color: lch(55 90 40); /* replaces #e63946 */
+  font-size: 0.97rem;
+  margin-top: 0.1rem;
+}
+.tagsInput {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+.tag {
+  display: flex;
+  align-items: center;
+  background: lch(85 90 90); /* replaces #facc15 */
+  color: lch(15 5 270); /* replaces #18181c */
+  border-radius: 14px;
+  padding: 3px 12px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-right: 0.2rem;
+}
+.removeTag {
+  background: none;
+  border: none;
+  color: lch(55 90 40); /* replaces #e63946 */
+  font-size: 1.07rem;
+  margin-left: 0.2rem;
+  cursor: pointer;
+}
+.submitBtn {
+  padding: 1rem 2.5rem;
+  background: lch(85 90 90); /* replaces #facc15 */
+  color: lch(15 5 270); /* replaces #18181c */
+  border: none;
+  border-radius: 30px;
+  font-size: 1.07rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 1rem;
+  transition: background 0.18s, color 0.18s;
+}
+.submitBtn:hover {
+  background: lch(25 10 270); /* replaces #22223b */
+  color: lch(85 90 90); /* replaces #facc15 */
+}

@@ -1,10 +1,3 @@
-/**
- * Hero.jsx
- * - Eye-catching intro with strong call-to-action.
- * - Uses semantic <section>, headings, and accessible buttons.
- * - Modular CSS for custom gradients and interaction.
- */
-
 import styles from "../styles/Hero.module.css";
 import { Link } from "react-router-dom";
 
@@ -15,10 +8,9 @@ export default function Hero() {
         Welcome to <span className={styles.highlight}>Code Archive</span>
       </h1>
       <p className={styles.subtitle}>
-        Your personal, beautifully organized library for code snippets and reusable functions.
+        Save, organize, and instantly reuse your most useful code snippets and functions. Boost your workflow with one click.
       </p>
       <div className={styles.actions}>
-        {/* Use semantic links styled as buttons for best accessibility */}
         <Link to="/archive" className={styles.button}>
           Browse Archive
         </Link>
