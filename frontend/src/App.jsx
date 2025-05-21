@@ -1,50 +1,28 @@
 /**
  * App.jsx
- * - SPA entry point.
- * - Sets up client-side routing, layout, and global design patterns.
- * - Uses React Router for navigation—no page reloads.
- * - Applies modular CSS for maintainability.
+ * - What: Minimal SPA entry point for Code Archive.
+ * - Why: Sets up sidebar navigation and a placeholder main area.
+ * - How: Imports only essential components, uses inline style for layout.
+ * - Usage: This is the root React component, rendered by main.jsx.
  */
 
-import React, { Suspense, lazy } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-
-import Navbar from "./components/Navbar"; //   Layout components
-import Footer from "./components/Footer";
-
-import Home from "./pages/Home"; //  -----   Pages
-const Archive = lazy(() => import("./pages/Archive"));
-const AddSnippet = lazy(() => import("./pages/AddSnippet"));
-
-import styles from "./styles/App.module.css"; // Modular CSS for root layout
+import React from "react";
+import NavBar from "./components/NavBar/NavBar";
+import SideBar from "./components/SideBar/SideBar";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/HomePage/Home"
 
 export default function App() {
+  // Renders sidebar, navbar, main content, and footer.
   return (
     <>
-      {/* Global Layout */}
-      <div className={styles.appWrapper}>
-        {/* Consistent navigation at top */}
-        <Navbar />
-
-        {/* Central content area for all routes */}
-        <main className={styles.mainContent}>
-          {/* Suspense provides fallback UI while lazy routes load */}
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              {/* Default route: Home page */}
-              <Route path="/" element={<Home />} />
-              {/* Archive and AddSnippet routes */}
-              <Route path="/archive" element={<Archive />} />
-              <Route path="/add" element={<AddSnippet />} />
-              {/* Catch-all: redirect unknown routes to Home */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Suspense>
-        </main>
-
-        {/* Footer always visible */}
-        <Footer />
-      </div>
+      
+      <main className="appWrapper">
+        <SideBar />
+        <Home />
+      </main>
+      
+      <Footer />
     </>
-  );
-}
+  )
+};

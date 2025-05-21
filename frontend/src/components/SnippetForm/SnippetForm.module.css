@@ -1,15 +1,24 @@
+/**
+ * SnippetForm.module.css
+ * - Purpose: Styles for the SnippetForm component.
+ * - How to customize: Change LCH color values, spacing, or form layout as needed.
+ * - All classes are locally scoped (CSS Modules) to avoid global conflicts.
+ * - For accessibility: All color values use LCH for better contrast.
+ */
+
 /* Uses LCH color values for modern, accessible color contrast throughout the form UI */
 
 .form {
-  background: lch(25 10 270); /* replaces #23233a */
-  border-radius: 18px;
-  padding: 2rem;
-  box-shadow: 0 2px 32px rgba(58, 134, 255, 0.08);
-  max-width: 700px;
-  margin: 2rem auto;
+  background-color: rgb(0, 0, 0);
+  border-radius: 14px;
+  padding: .8rem;
+  box-shadow: 0 2px 32px lch(66.5% 52.44 263.19 / 0.699);
+  max-width: 500px;
+  margin: 4rem auto;
   display: flex;
   flex-direction: column;
-  gap: 1.7rem;
+  width: 90%;
+
 }
 .fieldGroup {
   display: flex;
@@ -17,13 +26,16 @@
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
+
 .flexRow {
   display: flex;
-  gap: 2rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 200px;
 }
 label {
   font-weight: 600;
-  color: lch(85 90 90); /* replaces #facc15 */
+  color:lch(85.5% 1.09 18.95);
   letter-spacing: 0.03em;
 }
 input,
@@ -33,7 +45,7 @@ select {
   border: none;
   border-radius: 7px;
   background: lch(15 5 270); /* replaces #18181c */
-  color: lch(98 2 90); /* replaces #f7fafc */
+  color: lch(100% 0.01 296.81); /* replaces #f7fafc */
   font-size: 1.04rem;
   transition: border 0.2s;
   outline: none;
@@ -41,7 +53,7 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  border: 2px solid lch(85 90 90); /* replaces #facc15 */
+  border: 2px solid lch(75.28% 37.29 294.06); /* replaces #facc15 */
 }
 .required {
   color: lch(55 90 40); /* replaces #e63946 */
@@ -86,7 +98,7 @@ select:focus {
 }
 .submitBtn {
   padding: 1rem 2.5rem;
-  background: lch(85 90 90); /* replaces #facc15 */
+  background: lch(70.04% 1.1 290.34); /* replaces #facc15 */
   color: lch(15 5 270); /* replaces #18181c */
   border: none;
   border-radius: 30px;
@@ -99,5 +111,5 @@ select:focus {
 }
 .submitBtn:hover {
   background: lch(25 10 270); /* replaces #22223b */
-  color: lch(85 90 90); /* replaces #facc15 */
+  color: lch(54.57% 68.25 29.61); /* replaces #facc15 */
 }

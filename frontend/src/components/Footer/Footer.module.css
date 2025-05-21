@@ -1,0 +1,17 @@
+/**
+ * Footer.module.css
+ * - What: Styles for the Footer component.
+ * - Why: Ensures consistent, accessible footer appearance.
+ * - How: Scoped to Footer.jsx via CSS Modules.
+ */
+
+.footer {
+    display: flex;
+    text-align: center;
+    padding: 1rem;
+    background: lch(98 0 0);
+    color: lch(5.55% 0.42 19.18);
+    font-size: 0.98rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}

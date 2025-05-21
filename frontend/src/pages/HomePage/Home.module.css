@@ -1,0 +1,86 @@
+/**
+ * home.module.css
+ * - Purpose: Styles for the home (landing) section.
+ * - How to customize: Change LCH color values, spacing, or layout as needed.
+ * - All classes are locally scoped (CSS Modules) to avoid global conflicts.
+ * - For accessibility: All color values use LCH for better contrast.
+ *
+ * === CSS Customization Cheatsheet ===
+ * 1. To change background color: edit `background` property (use LCH for accessibility).
+ * 2. To adjust spacing: modify `padding`, `margin`, or `gap`.
+ * 3. To change text color: edit `color` property.
+ * 4. To round corners: adjust `border-radius`.
+ * 5. To add or change shadows: edit `box-shadow`.
+ * 6. To make buttons stand out: tweak `.button` and `.buttonOutline` backgrounds/borders.
+ * 7. For mobile responsiveness: use `@media` queries.
+ * 8. To add new styles: create a new class, then import and use it in your React component.
+ * 9. All class names below have a comment describing their effect.
+ */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap'); /* Importing Inter font for better typography */
+@font-face { /* Custom font face for the app */
+  font-family: 'Inter';
+  src: url('https://fonts.gstatic.com/s/inter/v3/UcX0v4g1x2Y5a8f6e7g.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.homeWrapper { /* Main container for the home/landing section: centers content, sets background and padding */
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  background-color: linear-gradient(135deg, lch(0% 0 0 / 0.178) 45%, lch(28.73% 4.78 270.45) 30%, lch(53.69% 50.29 270.25 / 0.856) 99%);
+  border-radius: 0 0 40px 40px;
+  box-shadow: 0 8px 30px lch(66.5% 52.44 263.19 / 0.185);
+  color: mlch(0% 0 0);
+  max-width: 900px;
+}
+.home h1 { /* Main heading: large, bold, spaced letters */
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+  letter-spacing: 2px;
+  color: lch(0% 0 0);
+  text-shadow: 0 2px 4px lch(0 0 0 / 0.7);
+}
+
+.highlight { /* Highlighted text: accent color for emphasis */
+  color: lch(64.59% 61.92 26.85);
+}
+.subtitle { /* Subtitle text: lighter color, smaller, spaced below heading */
+  font-size: 1.19rem;
+  color: lch(95 2 90);
+  margin-bottom: 2.5rem;
+}
+.actions { /* Button row: horizontal flex layout, spacing between buttons */
+  margin-top: 1.6rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.button, /* Primary button: filled background, rounded, bold */
+.buttonOutline { /* Outline button: transparent background, colored border */
+  padding: 0.95rem 2.3rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.07rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.button { /* Filled button: accent background, dark text */
+  background: lch(32.28% 132.7 306.43);
+  color: lch(15 5 270);
+}
+.buttonOutline { /* Outline button: transparent, accent border and text */
+  background: transparent;
+  color: lch(42.5% 101.88 298.21);
+  border: 2px solid lch(85 90 90);
+}
+.button:hover,
+.buttonOutline:hover { /* Button hover: light background, dark text */
+  background: lch(98 2 90);
+  color: lch(15 5 270);
+}

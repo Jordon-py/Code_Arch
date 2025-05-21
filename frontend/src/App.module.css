@@ -1,0 +1,17 @@
+/**
+ * App.module.css
+ * - Purpose: Styles for the main app layout and content wrapper.
+ * - How to customize: Change LCH color values, spacing, or layout as needed.
+ * - All classes are locally scoped (CSS Modules) to avoid global conflicts.
+ * - For accessibility: All color values use LCH for better contrast.
+ */
+
+.appWrapper {
+  max-height: 100vh;
+  min-width: 300px;
+  display: flex;
+  flex-direction: row;
+  background: lch(0% 0 0);
+  
+
+}

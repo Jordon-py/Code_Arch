@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import SnippetList from "../components/SnippetList";
-import { getSnippets } from "../services/snippetApi";
+import SnippetList from "../../components/SnippetList";
+import { getSnippets } from "../../services/snippetApi";
 
 // Archive.jsx - Displays archived code snippets.
 // What: Shows a list of saved/archived snippets.

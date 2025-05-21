@@ -25,7 +25,7 @@ export default function AddSnippet() {
 
   return (
     <main>
-      <h2>Add a New Snippet</h2>
+      <h2>Code_Arch</h2>
       <SnippetForm onSave={handleSave} />
       {status && (
         <div

@@ -1,4 +1,10 @@
-/* Uses LCH color values for modern, accessible color contrast throughout the card UI */
+/**
+ * SnippetCard.module.css
+ * - Purpose: Styles for the SnippetCard component.
+ * - How to customize: Change LCH color values, spacing, or card layout as needed.
+ * - All classes are locally scoped (CSS Modules) to avoid global conflicts.
+ * - For accessibility: All color values use LCH for better contrast.
+ */
 
 :root {
   --color-bg-card: lch(25 10 270); /* replaces #23233a */

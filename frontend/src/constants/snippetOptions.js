@@ -34,5 +34,5 @@ export const SUBCATEGORY_OPTIONS = {
 };
 
 export const TAG_SUGGESTIONS = [
-  "timer", "react", "UI", "form", "input", "data", "loop", "array", "sort", "search"
+  "timer", "react", "UI", "form", "data", "loop", "array", "sort"
 ];

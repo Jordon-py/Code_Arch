@@ -2,30 +2,49 @@
  * SnippetForm.jsx
  * - Handles user input for adding a new code snippet.
  * - Implements accessible, validated form.
- * - Uses modular CSS for styling.
- * - Normalizes tags to always use { label, color } objects for backend compatibility.
- * - 💡 Consider extracting tag logic to a custom hook for reuse.
+ * - Uses controlled components for form fields.
  */
 
-import React, { useState } from "react";
 import {
   CATEGORY_OPTIONS,
   SUBCATEGORY_OPTIONS,
   TAG_SUGGESTIONS,
-} from "../constants/snippetOptions";
-import styles from "../styles/SnippetForm.module.css";
+} from "../../constants/snippetOptions.js";
+import normalizeTags from "../../utils/normalizeTags.js"; // Utility to normalize tags
+import styles from "./SnippetForm.module.css";
+import React, { useState } from "react";
 
+//  ---------------------------------------------------------------------
+// Helper: Normalize tags to { label, color } objects
 // Helper: Validate that all required fields are filled
+// Function to validate form fields and return an object containing error messages for invalid fields
+//------------------------------------------------------------------------------------
+
+// Function to validate form fields
 const validate = (fields) => {
   const errors = {};
   if (!fields.title.trim()) errors.title = "Title is required.";
+
   if (!fields.description.trim())
     errors.description = "Description is required.";
+
   if (!fields.category) errors.category = "Category is required.";
+
   if (!fields.subcategory) errors.subcategory = "Subcategory is required.";
+
   if (!fields.code.trim()) errors.code = "Code is required.";
   return errors;
 };
+
+//  ---------------------------------------------------------------------
+
+// SnippetForm component: Form for adding a new code snippet
+// - Props: onSave: Function to call when the form is submitted successfully
+// - State: fields (form data), errors (validation errors), tagInput (for custom tag entry)
+// - Functions: handleChange (update form fields), handleAddTag (add a tag), handleRemoveTag (remove a tag), handleSubmit (submit the form)
+// - Render: Form with fields for title, description, category, subcategory, tags, and code
+
+//   -------------------------------------------------------------------------
 
 export default function SnippetForm({ onSave }) {
   // --- Form state ---
@@ -43,12 +62,13 @@ export default function SnippetForm({ onSave }) {
   // --- Handle input changes (for all fields) ---
   function handleChange(e) {
     const { name, value } = e.target;
-    setFields((prev) => ({
-      ...prev,
-      [name]: value,
-      // Reset subcategory if category changes
-      ...(name === "category" ? { subcategory: "" } : {}),
-    }));
+    setFields((prev) => {
+      const updatedFields = { ...prev, [name]: value };
+      if (name === "category") {
+        updatedFields.subcategory = "";
+      }
+      return updatedFields;
+    });
   }
 
   // --- Add a tag from input ---
@@ -89,9 +109,8 @@ export default function SnippetForm({ onSave }) {
     // Normalize tags before saving (ensure all are { label, color })
     const normalizedFields = {
       ...fields,
-      tags: fields.tags.map((t) =>
-        typeof t === "string" ? { label: t, color: "#facc15" } : t
-      ),
+      // Normalize tags to ensure backend compatibility
+      tags: normalizeTags(fields.tags),
     };
     onSave && onSave(normalizedFields);
     // Optionally reset form
@@ -152,6 +171,7 @@ export default function SnippetForm({ onSave }) {
         )}
       </div>
 
+      {/* Group category, subcategory, and tags in a single flexRow for better layout */}
       <div className={styles.flexRow}>
         <div className={styles.fieldGroup}>
           <label htmlFor="category">
@@ -176,7 +196,7 @@ export default function SnippetForm({ onSave }) {
           )}
         </div>
 
-        <div className={styles.fieldGroup}>
+        <div className={styles.fieldGroup} id={styles.tags}>
           <label htmlFor="subcategory">
             Subcategory<span className={styles.required}>*</span>
           </label>
@@ -200,52 +220,51 @@ export default function SnippetForm({ onSave }) {
             <span className={styles.errorMsg}>{errors.subcategory}</span>
           )}
         </div>
-      </div>
 
-      {/* Tags: Suggest-as-you-type and allow freeform */}
-      <div className={styles.fieldGroup}>
-        <label htmlFor="tags">Tags</label>
-        <div className={styles.tagsInput}>
-          {fields.tags.map((tag) => (
-            <span
-              key={typeof tag === "string" ? tag : tag.label}
-              className={styles.tag}
-            >
-              {typeof tag === "string" ? tag : tag.label}
-              <button
-                type="button"
-                aria-label={`Remove tag ${
-                  typeof tag === "string" ? tag : tag.label
-                }`}
-                className={styles.removeTag}
-                onClick={() => handleRemoveTag(tag)}
+        {/* Tags input is now grouped in the same flexRow */}
+        <div className={styles.fieldGroup} id={styles.tags}>
+          <label htmlFor="tags">Tags</label>
+          <div className={styles.tagsInput}>
+            {fields.tags.map((tag) => (
+              <span
+                key={typeof tag === "string" ? tag : tag.label}
+                className={styles.tag}
               >
-                ×
-              </button>
-            </span>
-          ))}
-          <input
-            type="text"
-            id="tags"
-            value={tagInput}
-            onChange={(e) => setTagInput(e.target.value)}
-            onKeyDown={(e) => (e.key === "Enter" ? handleAddTag(e) : null)}
-            placeholder="Add tag and press Enter"
-            list="tag-suggestions"
-          />
-          <datalist id="tag-suggestions">
-            {TAG_SUGGESTIONS.filter(
-              (t) =>
-                !fields.tags.some(
-                  (tag) => (typeof tag === "string" ? tag : tag.label) === t
-                )
-            ).map((t) => (
-              <option key={t} value={t} />
+                {typeof tag === "string" ? tag : tag.label}
+                <button
+                  type="button"
+                  aria-label={`Remove tag ${
+                    typeof tag === "string" ? tag : tag.label
+                  }`}
+                  className={styles.removeTag}
+                  onClick={() => handleRemoveTag(tag)}
+                >
+                  ×
+                </button>
+              </span>
             ))}
-          </datalist>
+            <input
+              type="text"
+              id="tags"
+              value={tagInput}
+              onChange={(e) => setTagInput(e.target.value)}
+              onKeyDown={(e) => (e.key === "Enter" ? handleAddTag(e) : null)}
+              placeholder="Add tag and press Enter"
+              list="tag-suggestions"
+            />
+            <datalist id="tag-suggestions">
+              {TAG_SUGGESTIONS.filter(
+                (t) =>
+                  !fields.tags.some(
+                    (tag) => (typeof tag === "string" ? tag : tag.label) === t
+                  )
+              ).map((t) => (
+                <option key={t} value={t} />
+              ))}
+            </datalist>
+          </div>
         </div>
       </div>
-
       {/* Code Editor */}
       <div className={styles.fieldGroup}>
         <label htmlFor="code">

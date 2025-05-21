@@ -1,0 +1,29 @@
+/* styles/reset.css */
+:root {
+  /* Default font smoothing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+html, body {
+  height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: lch(2.59% 4.06 247.02);
+  margin: 0%;
+}
+
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sidebar-bg: lch(20% 15 250);
+    --accent: lch(60% 80 280);
+  }
+}
