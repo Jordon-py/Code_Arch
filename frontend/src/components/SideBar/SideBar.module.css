@@ -6,7 +6,7 @@
  */
 
 .sidebar {
-  position:absolute;
+  position:fixed;
   left: 0;
   top: 0;
   bottom: 0;
@@ -19,7 +19,7 @@
   );
   border-right: 1.5px double lch(74.24% 18.26 252.36 / 0.459);
   backdrop-filter: blur(8px);
-  box-shadow: 2px 10px 24px 23px lch(38.83% 117.9 304.69 / 0.459);
+  box-shadow: -12px 10px 24px 23px lch(47.91% 89.25 293.23 / 0.205);
   transition: width 0.33s cubic-bezier(0.85, 0, 0.16, 1);
   overflow: hidden;
   z-index: 99;
@@ -28,8 +28,8 @@
 .sidebar ul {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
-  margin-top: 4rem;
+  gap: 6rem;
+  margin-top: 6rem;
   list-style: none;
 }
 .menuItem {
@@ -48,7 +48,7 @@
 .menuItem:focus {
   background: rgba(60, 120, 220, 0.1);
   color: lch(44.57% 96.33 296.27);
-  box-shadow: 0 0 8px lch(60 80 250), 0 0 32px lch(17.39% 16.86 181.69 / 0.363);
+  box-shadow: 0 0 8px lch(60 80 250), 0 0 12px lch(74.83% 48.27 178.91 / 0.425);
   outline: none;
 }
 .linkLabel {
@@ -58,6 +58,8 @@
   transition: opacity 0.24s;
 }
 .active {
-  background: lch(67.37% 55.18 25.55);
+  background: lch(55.08% 74.45 289.26);
   color: lch(0% 0 0);
+  transform: rotate3d(60, 120, 145);
+  transition-duration: 3s;
 }

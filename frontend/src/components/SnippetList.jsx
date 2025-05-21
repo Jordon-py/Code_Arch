@@ -5,7 +5,8 @@
  * - Accepts a `snippets` prop—can be from API or static sample.
  */
 
-import SnippetCard from "./SnippetCard";
+import React from "react";
+import SnippetCard from "./SnippetCard/SnippetCard";
 
 export default function SnippetList({ snippets = [] }) {
   if (!snippets.length) {
@@ -13,7 +14,7 @@ export default function SnippetList({ snippets = [] }) {
   }
   return (
     <section aria-label="Saved code snippets">
-      {snippets.map(snippet => (
+      {snippets.map((snippet) => (
         <SnippetCard key={snippet.id || snippet._id} snippet={snippet} />
       ))}
     </section>

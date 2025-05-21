@@ -1,50 +1,18 @@
 /**
- * SnippetForm.jsx
- * - Handles user input for adding a new code snippet.
- * - Implements accessible, validated form.
- * - Uses controlled components for form fields.
+ * Enhanced SnippetForm.jsx
+ * What: Form for adding/editing code snippets.
+ * Why: Central to snippet creation in SPA.
+ * How: Handles validation, triggers floating archive animation, and supports MongoDB-ready data.
  */
 
+import React, { useState } from "react";
 import {
   CATEGORY_OPTIONS,
   SUBCATEGORY_OPTIONS,
   TAG_SUGGESTIONS,
 } from "../../constants/snippetOptions.js";
-import normalizeTags from "../../utils/normalizeTags.js"; // Utility to normalize tags
+import normalizeTags from "../../utils/normalizeTags.js";
 import styles from "./SnippetForm.module.css";
-import React, { useState } from "react";
-
-//  ---------------------------------------------------------------------
-// Helper: Normalize tags to { label, color } objects
-// Helper: Validate that all required fields are filled
-// Function to validate form fields and return an object containing error messages for invalid fields
-//------------------------------------------------------------------------------------
-
-// Function to validate form fields
-const validate = (fields) => {
-  const errors = {};
-  if (!fields.title.trim()) errors.title = "Title is required.";
-
-  if (!fields.description.trim())
-    errors.description = "Description is required.";
-
-  if (!fields.category) errors.category = "Category is required.";
-
-  if (!fields.subcategory) errors.subcategory = "Subcategory is required.";
-
-  if (!fields.code.trim()) errors.code = "Code is required.";
-  return errors;
-};
-
-//  ---------------------------------------------------------------------
-
-// SnippetForm component: Form for adding a new code snippet
-// - Props: onSave: Function to call when the form is submitted successfully
-// - State: fields (form data), errors (validation errors), tagInput (for custom tag entry)
-// - Functions: handleChange (update form fields), handleAddTag (add a tag), handleRemoveTag (remove a tag), handleSubmit (submit the form)
-// - Render: Form with fields for title, description, category, subcategory, tags, and code
-
-//   -------------------------------------------------------------------------
 
 export default function SnippetForm({ onSave }) {
   // --- Form state ---
@@ -57,25 +25,34 @@ export default function SnippetForm({ onSave }) {
     code: "",
   });
   const [errors, setErrors] = useState({});
-  const [tagInput, setTagInput] = useState(""); // For custom tag entry
+  const [tagInput, setTagInput] = useState("");
+  const [submitting, setSubmitting] = useState(false); // For animation/future UX
 
-  // --- Handle input changes (for all fields) ---
+  // --- Validation ---
+  const validate = (fields) => {
+    const errors = {};
+    if (!fields.title.trim()) errors.title = "Title is required.";
+    if (!fields.description.trim())
+      errors.description = "Description is required.";
+    if (!fields.category) errors.category = "Category is required.";
+    if (!fields.subcategory) errors.subcategory = "Subcategory is required.";
+    if (!fields.code.trim()) errors.code = "Code is required.";
+    return errors;
+  };
+
+  // --- Handlers ---
   function handleChange(e) {
     const { name, value } = e.target;
     setFields((prev) => {
       const updatedFields = { ...prev, [name]: value };
-      if (name === "category") {
-        updatedFields.subcategory = "";
-      }
+      if (name === "category") updatedFields.subcategory = "";
       return updatedFields;
     });
   }
 
-  // --- Add a tag from input ---
   function handleAddTag(e) {
     e.preventDefault();
     const tag = tagInput.trim();
-    // Always store tags as { label, color } objects for consistency
     if (
       tag &&
       !fields.tags.some((t) => (typeof t === "string" ? t : t.label) === tag)
@@ -88,7 +65,6 @@ export default function SnippetForm({ onSave }) {
     setTagInput("");
   }
 
-  // --- Remove a tag ---
   function handleRemoveTag(tag) {
     setFields((prev) => ({
       ...prev,
@@ -100,38 +76,50 @@ export default function SnippetForm({ onSave }) {
     }));
   }
 
-  // --- Handle form submission ---
   async function handleSubmit(e) {
     e.preventDefault();
+    setSubmitting(true);
     const validationErrors = validate(fields);
     setErrors(validationErrors);
-    if (Object.keys(validationErrors).length > 0) return;
-    // Normalize tags before saving (ensure all are { label, color })
+    if (Object.keys(validationErrors).length > 0) {
+      setSubmitting(false);
+      return;
+    }
     const normalizedFields = {
       ...fields,
-      // Normalize tags to ensure backend compatibility
       tags: normalizeTags(fields.tags),
     };
-    onSave && onSave(normalizedFields);
-    // Optionally reset form
-    setFields({
-      title: "",
-      description: "",
-      category: "",
-      subcategory: "",
-      tags: [],
-      code: "",
-    });
+
+    // Pass in a callback for when animation completes, if needed
+    onSave &&
+      onSave(normalizedFields, () => {
+        // Called after "floating" animation finishes, can reset state here if you want
+        setFields({
+          title: "",
+          description: "",
+          category: "",
+          subcategory: "",
+          tags: [],
+          code: "",
+        });
+        setSubmitting(false);
+      });
+    // If you want instant reset, just call setFields here too
+    setSubmitting(false);
   }
 
-  // --- Render ---
   return (
     <form
       className={styles.form}
       onSubmit={handleSubmit}
       autoComplete="off"
       aria-label="Add new code snippet"
+      style={{
+        opacity: submitting ? 0.7 : 1,
+        pointerEvents: submitting ? "none" : "auto",
+      }}
     >
+      {/* Title */}
       <div className={styles.fieldGroup}>
         <label htmlFor="title">
           Title<span className={styles.required}>*</span>
@@ -152,6 +140,7 @@ export default function SnippetForm({ onSave }) {
         )}
       </div>
 
+      {/* Description */}
       <div className={styles.fieldGroup}>
         <label htmlFor="description">
           Description<span className={styles.required}>*</span>
@@ -171,8 +160,9 @@ export default function SnippetForm({ onSave }) {
         )}
       </div>
 
-      {/* Group category, subcategory, and tags in a single flexRow for better layout */}
+      {/* Category, Subcategory, Tags */}
       <div className={styles.flexRow}>
+        {/* Category */}
         <div className={styles.fieldGroup}>
           <label htmlFor="category">
             Category<span className={styles.required}>*</span>
@@ -196,7 +186,8 @@ export default function SnippetForm({ onSave }) {
           )}
         </div>
 
-        <div className={styles.fieldGroup} id={styles.tags}>
+        {/* Subcategory */}
+        <div className={styles.fieldGroup}>
           <label htmlFor="subcategory">
             Subcategory<span className={styles.required}>*</span>
           </label>
@@ -221,14 +212,20 @@ export default function SnippetForm({ onSave }) {
           )}
         </div>
 
-        {/* Tags input is now grouped in the same flexRow */}
-        <div className={styles.fieldGroup} id={styles.tags}>
+        {/* Tags */}
+        <div className={styles.fieldGroup}>
           <label htmlFor="tags">Tags</label>
           <div className={styles.tagsInput}>
             {fields.tags.map((tag) => (
               <span
                 key={typeof tag === "string" ? tag : tag.label}
                 className={styles.tag}
+                style={{
+                  background:
+                    typeof tag === "object" && tag.color
+                      ? tag.color
+                      : "#facc15",
+                }}
               >
                 {typeof tag === "string" ? tag : tag.label}
                 <button
@@ -265,6 +262,7 @@ export default function SnippetForm({ onSave }) {
           </div>
         </div>
       </div>
+
       {/* Code Editor */}
       <div className={styles.fieldGroup}>
         <label htmlFor="code">
@@ -284,8 +282,13 @@ export default function SnippetForm({ onSave }) {
         {errors.code && <span className={styles.errorMsg}>{errors.code}</span>}
       </div>
 
-      <button className={styles.submitBtn} type="submit">
-        Save Snippet
+      <button
+        className={styles.submitBtn}
+        type="submit"
+        disabled={submitting}
+        aria-busy={submitting}
+      >
+        {submitting ? "Saving..." : "Save Snippet"}
       </button>
     </form>
   );

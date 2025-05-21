@@ -4,127 +4,161 @@
 
 ### 🗃️ Empty or Near-Empty Files
 
-- `/frontend/src/components/SnippetList.jsx`
-- `/frontend/src/components/SnippetForm.jsx`
-- `/frontend/src/components/SnippetCard.jsx`
-- `/frontend/src/components/SearchBar.jsx`
-- `/frontend/src/components/Navbar.jsx`
-- `/frontend/src/components/Hero.jsx`
-- `/frontend/src/components/Footer.jsx`
-- `/frontend/src/pages/Home.jsx`
-- `/frontend/src/pages/Archive.jsx`
-- `/frontend/src/pages/AddSnippet.jsx`
-- `/frontend/src/hooks/useSnippets.js`
-- `/frontend/src/services/snippetApi.js`
-- `/frontend/src/utils/normalizeTags.js`
-- `/frontend/src/data/snippets.js`
-- `/frontend/src/constants/snippetOptions.js`
-- `/server/routes/snippets.js`
-- `/server/controllers/snippetsController.js`
-- `/server/models/Snippet.js`
-- `/server/index.js`
+### `/frontend/src/components/SnippetCard/SnippetCard.jsx` (Unused Module)
 
-  ```js
-  // ⚠️ This file is empty or trivial — candidate for removal or implementation.
-  ```
+**Flag:** 🗃️ Empty file
 
-  _Mentor Insight:_  
-  Empty files can cause confusion, bloat, and may indicate unfinished features.  
-  _Next Action:_ Implement the intended logic or remove the file if not needed.
+**Root Issue:** No implementation or export present
+
+**Mentor Insight:** This file is likely a placeholder for a component that was never implemented or was removed. Keeping empty files can cause confusion and bloat in the codebase.
+
+**Refactor Tip:** Remove the file if not needed, or implement the component if planned.
+
+**Best Practice Reminder:** Avoid leaving empty files in the repository; they should be either implemented or deleted.
+
+**Suggestion:** If a SnippetCard component is needed, scaffold it with prop types and a minimal render.
 
 ---
 
-### 💤 Unused or Redundant Files
+### `/frontend/src/data/snippets.js`
 
-- No unused or redundant files detected (all files are either empty or not referenced yet).
+**Flag:** 🗃️ Empty file
 
----
+**Root Issue:** No data or export present
 
-### 🔁 Duplicate or Outdated Components
+**Mentor Insight:** This file may have been intended for static snippet data or as a mock data source. Empty data files can mislead future contributors.
 
-- No duplicate or outdated components detected.
+**Refactor Tip:** Remove or populate with sample data if used for development/testing.
 
----
-
-### 🧩 Potential Refactor Targets
-
-- **No refactor targets found** (no logic present to refactor).
+**Best Practice Reminder:** Keep data files meaningful and up-to-date.
 
 ---
 
-## Error Analysis & Targeted Tips
+### `/frontend/src/components/SnippetList.jsx`
 
-### 1. Error Analysis
+**Flag:** 🗃️ Trivial implementation (only a stub comment and export)
 
-- **No logic or syntax errors detected** (files are empty).
+**Root Issue:** No logic or rendering present
 
-### 2. Targeted Tips & Fixes
+**Mentor Insight:** This file is a stub and does not provide any functionality. It may be a placeholder for future development.
 
-- **Implement or remove empty files** to avoid confusion and dead code.
+**Refactor Tip:** Implement the component or remove the file until needed.
 
-### 3. Best Practices & Style Advice
-
-- **Add file-level comments** to all files, explaining their purpose and usage.
-- **Implement core logic** before adding more files to avoid bloat.
-
-### 4. Creative Enhancements
-
-- Once files are implemented, consider DRY principles and modularization.
+**Best Practice Reminder:** Avoid committing stubs unless part of an active development branch.
 
 ---
 
-## Final Summary
+### `/frontend/src/hooks/useSnippets.js`
 
-**What you did well:**
+**Flag:** 🗃️ Trivial/boilerplate
 
-- Project structure is clear and modular.
-- Good separation between frontend and backend folders.
+**Root Issue:** Only a stub function present
 
-**What needs improvement:**
+**Mentor Insight:** Custom hooks should encapsulate reusable logic. This file currently does not provide any value.
 
-- Remove or implement empty files.
-- Add file-level comments for clarity.
-- Begin implementing core features (components, routes, models, services).
+**Refactor Tip:** Implement the hook or remove the file.
 
-**Learning direction:**
-
-- Focus on implementing one feature at a time.
-- Document each file as you go.
-- Refactor repeated logic once features are in place.
+**Best Practice Reminder:** Only include hooks that are used and provide meaningful abstraction.
 
 ---
 
-## 🧪 Codebase Audit Summary
+### `/frontend/src/services/snippetApi.js`
 
-- 17 files flagged: all are empty or trivial.
-- No unused or duplicate components.
-- No logic to refactor yet.
+**Flag:** 🗃️ Trivial/boilerplate
+
+**Root Issue:** Only comments, no implementation
+
+**Mentor Insight:** Service files should encapsulate API logic. This file is a placeholder.
+
+**Refactor Tip:** Implement API methods or remove the file.
+
+**Best Practice Reminder:** Service files should be implemented or omitted.
 
 ---
 
-_Christopher, your project structure is ready for development. Start implementing features and keep documentation strong!_
+### `/frontend/src/utils/normalizeTags.js`
+
+**Flag:** 🗃️ Trivial/boilerplate
+
+**Root Issue:** Only a comment, no logic
+
+**Mentor Insight:** Utility files should provide reusable logic. This file is a placeholder.
+
+**Refactor Tip:** Implement the utility or remove the file.
+
+**Best Practice Reminder:** Only include utility files with actual logic.
 
 ---
 
-### `/frontend/src/components/SideBar.jsx`
+### `/server/controllers/snippetsController.js`
 
-**Flag:** 🧩 Visually enhanced, accessible sidebar navigation
+**Flag:** 🗃️ Trivial/boilerplate
 
-**Mentor Insight:**  
-This sidebar uses React state and CSS Modules for a modern, animated, and accessible navigation experience. The hamburger menu animates into a close icon, and the sidebar slides in/out with smooth transitions. All colors use LCH for accessibility.
+**Root Issue:** Only comments, no implementation
 
-**Refactor Tip:**
+**Mentor Insight:** Controller files should contain business logic for routes. This file is a placeholder.
 
-- To add new links, update the `menu` array.
-- For custom icons, import from `react-icons` or your own SVGs.
-- Adjust Sidebar.module.css for color, spacing, or animation tweaks.
+**Refactor Tip:** Implement controller logic or remove the file.
 
-**Best Practice Reminder:**
+**Best Practice Reminder:** Controller files should be implemented or omitted.
 
-- Use keyboard and screen reader accessibility features for all navigation.
-- Keep sidebar logic in a dedicated component for maintainability.
+---
 
-**Suggestion:**
+### `/server/models/Snippet.js`
 
-- Consider adding route navigation logic to each menu item for full SPA integration.
-- For even more visual impact, add subtle gradients or shadow effects to the sidebar background.
+**Flag:** 🗃️ Trivial/boilerplate
+
+**Root Issue:** Only comments, no schema defined
+
+**Mentor Insight:** Model files should define Mongoose schemas. This file is a placeholder.
+
+**Refactor Tip:** Implement the schema or remove the file.
+
+**Best Practice Reminder:** Model files should be implemented or omitted.
+
+---
+
+### `/server/routes/snippets.js`
+
+**Flag:** 🗃️ Trivial/boilerplate
+
+**Root Issue:** Only comments, no route definitions
+
+**Mentor Insight:** Route files should define Express routes. This file is a placeholder.
+
+**Refactor Tip:** Implement the routes or remove the file.
+
+**Best Practice Reminder:** Route files should be implemented or omitted.
+
+---
+
+## 💤 Unused or Stale Modules
+
+### `/frontend/src/components/SnippetCard/SnippetCard.jsx`
+
+// 🔍 Not referenced in any import map — likely stale module
+
+**Root Issue:** No imports found across frontend
+
+**Mentor Insight:** This likely indicates dead component logic or unfinished feature.
+
+**Refactor Tip:** Consider merging or safely removing after verifying against dynamic imports.
+
+**Best Practice Reminder:** Keep components traceable from your UI map.
+
+---
+
+## 🔁 Redundant or Duplicated Logic
+
+_No direct duplication detected in provided files, but monitor for repeated patterns as the codebase grows._
+
+---
+
+## 🧩 Refactor Candidates
+
+- Consider abstracting repeated form validation logic (if it appears in multiple places) into a shared utility.
+- If multiple components use similar layout or animation logic, abstract into hooks or HOCs.
+
+---
+
+## End of Audit

@@ -1,43 +1,33 @@
-/**
- * SnippetCard.jsx
- * - Displays a single code snippet in a card format.
- * - Uses semantic <article> for standalone snippet content.
- * - Handles code formatting, category display, and tags.
- * - Each card is accessible and responsive.
- * - Tags are normalized to support both string and object formats for robustness.
- */
+import styles from './SnippetCard.module.css';
 
-import styles from "../styles/SnippetCard.module.css";
-
-export default function SnippetCard({ snippet }) {
-  // Defensive: Normalize tags to always display correctly (string or {label, color})
-  const tags = (snippet.tags || []).map((tag) =>
-    typeof tag === "string" ? { label: tag } : tag
-  );
-
+export default function SnippetCard({ snippet, index }) {
   return (
-    <article
-      className={styles.card}
-      tabIndex={0}
-      aria-label={`Code snippet: ${snippet.title}`}
+    <div
+      className={`${styles.card} ${snippet.animating ? styles.animating : ''}`}
+      style={{
+        animationDelay: `${index * 0.08}s`
+      }}
+      tabIndex={0} // for accessibility/focus
     >
-      <header className={styles.header}>
-        <h3 className={styles.title}>{snippet.title}</h3>
-        <span className={styles.category}>
-          {snippet.category} / {snippet.subcategory}
-        </span>
-      </header>
-      {/* Use <pre><code> for code semantics and copy-paste UX */}
-      <pre className={styles.codeBlock}>
-        <code>{snippet.code}</code>
-      </pre>
-      <ul className={styles.tags}>
-        {tags.map((tag) => (
-          <li key={tag.label} className={styles.tag}>
-            {tag.label}
-          </li>
+      <div className={styles.title}>{snippet.title}</div>
+      <div className={styles.meta}>
+        <span className={styles.category}>{snippet.category}</span>
+        {snippet.subcategory && <span>› {snippet.subcategory}</span>}
+      </div>
+      <pre className={styles.code}>{snippet.code}</pre>
+      <div className={styles.tags}>
+        {snippet.tags.map((tag) => (
+          <span
+            key={typeof tag === "string" ? tag : tag.label}
+            className={styles.tag}
+            style={{
+              background: (typeof tag === "object" && tag.color) ? tag.color : "#facc15"
+            }}
+          >
+            {typeof tag === "string" ? tag : tag.label}
+          </span>
         ))}
-      </ul>
-    </article>
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,36 @@
+.archive {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  background: rgba(35, 45, 80, 0.45);
+  border-radius: 1.7rem;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.17);
+  padding: 2.2rem 1.5rem 1.5rem;
+  position: relative;
+  min-height: 350px;
+  overflow: visible;
+  backdrop-filter: blur(20px) saturate(1.08);
+  transition: box-shadow 0.4s;
+}
+.grid {
+  display: grid;
+  gap: 2.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+  align-items: start;
+}
+.emptyMsg {
+  text-align: center;
+  color: #b8b9dd;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+}
+@media (max-width: 850px) {
+  .archive {
+    padding: 1.2rem 0.3rem 1.3rem;
+  }
+  .grid {
+    gap: 1.2rem;
+    grid-template-columns: 1fr;
+  }
+}

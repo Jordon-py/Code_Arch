@@ -4,10 +4,26 @@
 
 ## 🧪 Codebase Audit Summary
 
-- Backend and frontend files are present and contain logic; prior report of empty files was incorrect.
-- No unused or duplicate frontend components detected at this stage.
-- No refactor targets found yet; further file-level audit required for detailed insights.
-- Next: Continue detailed per-file audit to identify learning opportunities and architectural improvements.
+- 8 files flagged: 6 empty/trivial, 2 unused modules
+
+## 🧠 Learning Opportunities Identified
+
+- Placeholder files left in repo → Review file hygiene and commit discipline
+- Unused components/modules → Practice import tracing and dead code removal
+- Boilerplate service/controller/model files → Learn when to scaffold vs. when to implement
+
+## 💡 Cognitive Missteps (Root Causes)
+
+- 🗃️ Leaving empty or stub files in main branches
+- 💤 Not removing unused modules/components
+- ⚙️ Not implementing planned abstractions (e.g., API services, models)
+
+## 🎯 Next Learning Objectives
+
+- Study: File and component lifecycle management in React/Node projects
+- Practice: Tracing imports/exports to identify dead code
+- Review: When to scaffold vs. when to implement (see [React File Structure Best Practices](https://react.dev/learn/project-structure))
+- Bonus: Abstracting shared logic (e.g., validation, animation) into utilities or hooks
 
 ---
 
@@ -20,7 +36,7 @@
 
 ---
 
-# 📈 Project Insights (Live Record)
+## 📈 Project Insights (Live Record)
 
 ## Frontend Components Created (`/frontend/src`)
 

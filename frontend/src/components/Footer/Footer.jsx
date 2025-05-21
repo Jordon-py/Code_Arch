@@ -11,7 +11,7 @@ import styles from "./Footer.module.css"; // Import scoped CSS for styling
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <small>&copy; {new Date().getFullYear()} Code Archive</small>
+      <span>&copy; {new Date().getFullYear()} Code Archive</span>
     </footer>
   );
 }

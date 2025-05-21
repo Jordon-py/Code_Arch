@@ -13,12 +13,29 @@
   scroll-behavior: smooth;
 }
 html, body {
-  height: 100vh;
-  font-family: 'Inter', system-ui, sans-serif;
+  height: 100dvi;
   background-color: lch(2.59% 4.06 247.02);
   margin: 0%;
+  display: block;
 }
 
+h1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  font-size: 4rem;
+  justify-content: center;
+  color: whitesmoke;
+}
+
+p {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 2rem;
+  border-bottom-color: aliceblue;
+  color: whitesmoke;
+}
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {

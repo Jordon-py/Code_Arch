@@ -3,8 +3,8 @@
 // Why: Required for /add route in SPA.
 // How: Lazy-loaded in App.jsx for performance.
 
-import { useState } from "react";
-import SnippetForm from "../components/SnippetForm";
+import React, { useState } from "react";
+import SnippetForm from "../components/SnippetForm/SnippetForm";
 import { addSnippet } from "../services/snippetApi";
 import { useNavigate } from "react-router-dom";
 
@@ -24,8 +24,8 @@ export default function AddSnippet() {
   }
 
   return (
-    <main>
-      <h2>Code_Arch</h2>
+    <div>
+      <h2>Add New Snippet</h2>
       <SnippetForm onSave={handleSave} />
       {status && (
         <div
@@ -37,6 +37,6 @@ export default function AddSnippet() {
           {status}
         </div>
       )}
-    </main>
+    </div>
   );
 }
