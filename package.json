@@ -1,0 +1,1 @@
+{"name": "code-arch-heroku-wrapper","version": "1.0.0","description": "Heroku deployment wrapper for Code_Arch","private": true,"scripts": {"heroku-postbuild": "cd frontend && npm install && npm run build","start": "cd server && npm install && npm start"},"engines": {"node": "20.x"}}
