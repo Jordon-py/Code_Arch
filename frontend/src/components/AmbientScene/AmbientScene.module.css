@@ -1,0 +1,14 @@
+.sceneWrap {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.52;
+  filter: drop-shadow(0 0 40px lch(72% 68 292 / 0.32));
+}
+
+@media (max-width: 900px) {
+  .sceneWrap {
+    opacity: 0.36;
+  }
+}

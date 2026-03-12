@@ -1,0 +1,28 @@
+:root {
+  --bg: lch(8% 6 270);
+  --bg-soft: lch(10% 8 272);
+  --surface: lch(16% 10 270);
+  --surface-2: lch(20% 12 270);
+  --surface-3: lch(24% 16 272);
+
+  --accent: lch(70% 80 290);
+  --accent-soft: lch(70% 40 290);
+  --accent-cool: lch(74% 52 240);
+
+  --text: lch(95% 2 270);
+  --text-dim: lch(70% 2 270);
+  --text-muted: lch(62% 3 275);
+
+  --border: lch(40% 10 270 / 0.35);
+  --border-strong: lch(58% 24 286 / 0.52);
+
+  --shadow-soft: 0 20px 60px lch(0% 0 0 / 0.55);
+  --shadow-card: 0 30px 70px lch(0% 0 0 / 0.48);
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  --x: 50vw;
+  --y: 50vh;
+}

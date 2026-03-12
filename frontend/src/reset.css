@@ -1,46 +1,60 @@
-/* styles/reset.css */
-:root {
-  /* Default font smoothing */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100dvh;
+}
+
+html {
+  color-scheme: dark;
   scroll-behavior: smooth;
 }
-html, body {
-  height: 100dvi;
-  background-color: lch(2.59% 4.06 247.02);
-  margin: 0%;
-  display: block;
+
+body {
+  font-family: "Space Grotesk", "Sora", "Segoe UI Variable Display", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background:
+    radial-gradient(circle at 12% 16%, lch(54% 64 292 / 0.23), transparent 42%),
+    radial-gradient(circle at 82% 10%, lch(64% 54 240 / 0.18), transparent 40%),
+    linear-gradient(165deg, var(--bg-soft), var(--bg));
+  color: var(--text);
+  overflow-x: hidden;
+  position: relative;
 }
 
-h1 {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  font-size: 4rem;
-  justify-content: center;
-  color: whitesmoke;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at var(--x) var(--y),
+      lch(70% 80 290 / 0.15),
+      transparent 30%
+    );
+  pointer-events: none;
+  z-index: 0;
 }
 
-p {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  font-size: 2rem;
-  border-bottom-color: aliceblue;
-  color: whitesmoke;
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 120%, lch(100% 0 0 / 0.06), transparent 55%),
+    radial-gradient(circle at -10% 0%, lch(40% 32 262 / 0.08), transparent 35%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --sidebar-bg: lch(20% 15 250);
-    --accent: lch(60% 80 280);
-  }
+a {
+  color: inherit;
 }

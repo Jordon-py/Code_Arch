@@ -16,21 +16,39 @@
 //   - Sends JSON response (success or error) in a consistent format
 // -----------------------------------------------------------
 
+// controllers/snippetsController.js
+
 const Snippet = require("../models/Snippet");
 
-// -------------------------------------------------- GET /api/snippets -----    // List all snippets (newest first)
+// --------------------------------------------------
+// GET /api/snippets
+// List all snippets (newest first)
+// --------------------------------------------------
 
 exports.getAllSnippets = async (req, res) => {
   try {
-    const snippets = await Snippet.find().sort({ createdAt: -1 });
-    res.json({ success: true, data: snippets });
+    const snippets = await Snippet
+      .find()
+      .sort({ createdAt: -1 })
+      .lean();
+
+    console.log(`Fetched ${snippets.length} snippets`);
+
+    res.json({
+      success: true,
+      count: snippets.length,
+      data: snippets
+    });
+
   } catch (err) {
-    res
-      .status(500)
-      .json({ success: false, error: "Server error in Controllers" });
+    console.error("Error fetching snippets:", err);
+    res.status(500).json({
+      success: false,
+      error: "Server error in controller"
+    });
+
   }
 };
-
 //      ----------------------------------- POST /api/snippets   ----------------------------------------------------->     ----- // Add a new snippet
 
 exports.createSnippet = async (req, res) => {

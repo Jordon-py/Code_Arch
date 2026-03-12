@@ -1,17 +1,75 @@
-/**
- * App.module.css
- * - Purpose: Styles for the main app layout and content wrapper.
- * - How to customize: Change LCH color values, spacing, or layout as needed.
- * - All classes are locally scoped (CSS Modules) to avoid global conflicts.
- * - For accessibility: All color values use LCH for better contrast.
- */
-
 .appWrapper {
-  max-height: 100vh;
-  min-width: 300px;
+  min-height: 100dvh;
+  position: relative;
   display: flex;
-  flex-direction: row;
-  background: lch(0% 0 0);
-  
+  isolation: isolate;
+}
 
+.content {
+  margin-left: 220px;
+  width: calc(100% - 220px);
+  position: relative;
+  z-index: 2;
+  padding: 2.25rem clamp(1rem, 2.8vw, 2.8rem) 2rem;
+}
+
+.header {
+  background:
+    radial-gradient(circle at 12% 28%, lch(55% 70 290 / 0.34), transparent 50%),
+    linear-gradient(180deg, lch(18% 10 270 / 0.88), lch(13% 10 270 / 0.94));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(16px);
+  padding: clamp(1.4rem, 3.2vw, 2.4rem);
+  margin-bottom: 1.25rem;
+}
+
+.header h1 {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.02;
+  margin-bottom: 0.25rem;
+}
+
+.header p {
+  color: var(--text-dim);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+}
+
+.main {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.formShell {
+  position: relative;
+}
+
+.loading,
+.error {
+  border: 1px solid var(--border);
+  background: linear-gradient(160deg, lch(20% 10 270 / 0.66), lch(14% 9 270 / 0.9));
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-md);
+  color: var(--text-dim);
+  padding: 0.95rem 1rem;
+}
+
+.error {
+  color: lch(78% 45 20);
+  border-color: lch(58% 30 24 / 0.72);
+}
+
+@media (max-width: 980px) {
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 5.2rem 0.8rem 1.2rem;
+  }
+
+  .header {
+    margin-top: 0.2rem;
+  }
 }

@@ -1,35 +1,53 @@
-// snippetApi.js - Service for interacting with backend snippet API
-// Handles all CRUD operations for code snippets via REST endpoints.
-// Ensures tag structure is normalized for backend compatibility.
+/**
+ * snippetApi.js
+ * Service layer for communicating with the backend API.
+ *
+ * Tips:
+ * - Always parse fetch responses using res.json()
+ * - Handle errors early so UI doesn't crash
+ * - Centralize API URLs in one place
+ */
 
-const API_URL = "http://localhost:5000/api/snippets";
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api/snippets";
 
 // Fetch all snippets
 export async function getSnippets() {
   const res = await fetch(API_URL);
-  if (!res.ok) throw new Error("Failed to fetch snippets");
-  return res.body([]);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch snippets");
+  }
+
+  const json = await res.json();
+
+  return json.data;
 }
 
-// Create a new snippet
+// Create snippet
 export async function addSnippet(data) {
-  // Normalize tags to always be { label, color } objects for backend
   const normalized = {
     ...data,
     tags: (data.tags || []).map((t) =>
-      typeof t === "string" ? { label: t, color: "#facc15" } : t
+      typeof t === "string"
+        ? { label: t, color: "#facc15" }
+        : t
     ),
   };
+
   const res = await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(normalized),
   });
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.error || "Failed to add snippet");
-  }
-  return res.json();
-}
 
-// Optional: Implement update and delete as needed
+  const json = await res.json();
+
+  if (!res.ok) {
+    throw new Error(json.error || "Failed to add snippet");
+  }
+
+  return json.data;
+}
